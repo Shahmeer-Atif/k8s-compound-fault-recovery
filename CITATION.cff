@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software or its results, please cite it as below."
+title: "Compound Fault Recovery in Kubernetes: reproducibility materials"
+authors:
+  - family-names: Atif
+    given-names: Shahmeer
+    affiliation: "FAST NUCES Islamabad"
+  - family-names: Khan
+    given-names: Taaha Zaman
+    affiliation: "FAST NUCES Islamabad"
+repository-code: "https://github.com/Shahmeer-Atif/k8s-compound-fault-recovery"
+license: MIT
+date-released: "2026-09-08"
+keywords:
+  - kubernetes
+  - fault injection
+  - chaos engineering
+  - control plane
+  - self-healing
+  - compound faults

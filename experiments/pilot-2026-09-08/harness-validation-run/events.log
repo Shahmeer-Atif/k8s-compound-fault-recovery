@@ -1,0 +1,3 @@
+2026-09-08T17:53:12Z FAULT_INJECTED node=cfr-control-plane component=kube-controller-manager
+2026-09-08T17:53:17Z COMPOUND_POD_DELETED pod=nginx-75cfd468b8-2nr7z
+2026-09-08T17:54:21Z FAULT_CLEARED node=cfr-control-plane component=kube-controller-manager

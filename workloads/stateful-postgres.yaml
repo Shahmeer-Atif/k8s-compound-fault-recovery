@@ -1,0 +1,42 @@
+# Stateful workload for RQ2. Volume detachment is mediated by kube-controller-manager,
+# so this workload is expected to behave differently from the stateless case.
+apiVersion: v1
+kind: Service
+metadata:
+  name: pg
+spec:
+  clusterIP: None
+  selector: { app: pg }
+  ports: [{ port: 5432 }]
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pg
+spec:
+  serviceName: pg
+  replicas: 3
+  selector:
+    matchLabels: { app: pg }
+  template:
+    metadata:
+      labels: { app: pg }
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: postgres
+          image: postgres:16-alpine
+          env:
+            - { name: POSTGRES_PASSWORD, value: devonly }
+            - { name: PGDATA, value: /var/lib/postgresql/data/pgdata }
+          ports: [{ containerPort: 5432 }]
+          resources:
+            requests: { cpu: 50m, memory: 64Mi }
+            limits:   { cpu: 300m, memory: 256Mi }
+          volumeMounts:
+            - { name: data, mountPath: /var/lib/postgresql/data }
+  volumeClaimTemplates:
+    - metadata: { name: data }
+      spec:
+        accessModes: [ReadWriteOnce]
+        resources: { requests: { storage: 256Mi } }

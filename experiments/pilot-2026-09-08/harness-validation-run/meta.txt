@@ -1,0 +1,1 @@
+run=smoketest component=kube-controller-manager duration=60s compound=pod node=cfr-control-plane
